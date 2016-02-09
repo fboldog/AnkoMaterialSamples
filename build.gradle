@@ -1,0 +1,56 @@
+buildscript {
+    ext.kotlinVersion = '1.0.0-rc-1036'
+    ext.ankoVersion = '0.8.2'
+    ext.supportVersion = '23.1.1'
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0-beta2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+
+    defaultConfig {
+        applicationId 'com.ferencboldog.ankovskotlinx'
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName '1.0'
+    }
+
+    dexOptions {
+        incremental false
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.jetbrains.anko:anko-sdk15:$ankoVersion"
+//    compile 'org.jetbrains.anko:anko-support-v4:0.8'
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "org.jetbrains.anko:anko-appcompat-v7:$ankoVersion"
+
+    compile "com.android.support:design:$supportVersion"
+    compile "org.jetbrains.anko:anko-design:$ankoVersion"
+}
