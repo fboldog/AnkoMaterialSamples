@@ -14,11 +14,13 @@ import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI
 
 import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI.Companion.DRAWER_ID
 import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI.Companion.TOOLBAR_ID
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.debug
 
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 
-open class AnkoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+open class AnkoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
     lateinit var drawer: DrawerLayout
     lateinit var toolbar: Toolbar
@@ -41,12 +43,12 @@ open class AnkoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_camera -> Log.d("MainActivity", "-> camera")
-            R.id.nav_gallery -> Log.d("MainActivity", "-> gallery")
-            R.id.nav_slideshow -> Log.d("MainActivity", "-> slideshow")
-            R.id.nav_manage -> Log.d("MainActivity", "-> manage")
-            R.id.nav_share -> Log.d("MainActivity", "-> share")
-            R.id.nav_send -> Log.d("MainActivity", "-> send")
+            R.id.nav_camera -> debug("-> camera")
+            R.id.nav_gallery -> debug("-> gallery")
+            R.id.nav_slideshow -> debug("-> slideshow")
+            R.id.nav_manage -> debug("-> manage")
+            R.id.nav_share -> debug("-> share")
+            R.id.nav_send -> debug("-> send")
         }
 
         drawer.closeDrawer(GravityCompat.START)

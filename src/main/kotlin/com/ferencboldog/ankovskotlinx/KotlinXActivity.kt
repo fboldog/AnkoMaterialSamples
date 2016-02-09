@@ -17,6 +17,10 @@ import kotlinx.android.synthetic.main.activity_main.nav_view as navigationView
 
 class KotlinXActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    companion object {
+        private val TAG = KotlinXActivity::class.java.simpleName
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,12 +40,12 @@ class KotlinXActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_camera -> Log.d("MainActivity", "-> camera")
-            R.id.nav_gallery -> Log.d("MainActivity", "-> gallery")
-            R.id.nav_slideshow -> Log.d("MainActivity", "-> slideshow")
-            R.id.nav_manage -> Log.d("MainActivity", "-> manage")
-            R.id.nav_share -> Log.d("MainActivity", "-> share")
-            R.id.nav_send -> Log.d("MainActivity", "-> send")
+            R.id.nav_camera -> Log.d(TAG, "-> camera")
+            R.id.nav_gallery -> Log.d(TAG, "-> gallery")
+            R.id.nav_slideshow -> Log.d(TAG, "-> slideshow")
+            R.id.nav_manage -> Log.d(TAG, "-> manage")
+            R.id.nav_share -> Log.d(TAG, "-> share")
+            R.id.nav_send -> Log.d(TAG, "-> send")
         }
 
         drawer.closeDrawer(GravityCompat.START)
