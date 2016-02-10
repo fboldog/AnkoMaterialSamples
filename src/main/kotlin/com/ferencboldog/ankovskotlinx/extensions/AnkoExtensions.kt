@@ -40,17 +40,17 @@ fun AnkoContext<*>.colorAttr(@AttrRes attr: Int): Int {
     }
 }
 
-inline fun ViewManager.appBarLayout(@StyleRes theme: Int = 0): AppBarLayout = appBarLayout(theme, {})
-inline fun ViewManager.appBarLayout(@StyleRes theme: Int = 0, init: _AppBarLayout.() -> Unit): AppBarLayout {
+inline fun ViewManager.appBarLayout(@StyleRes theme: Int): AppBarLayout = appBarLayout(theme, {})
+inline fun ViewManager.appBarLayout(@StyleRes theme: Int, init: _AppBarLayout.() -> Unit): AppBarLayout {
     return ankoView(theme, `$$Anko$Factories$DesignViewGroup`.APP_BAR_LAYOUT) { init() }
 }
-inline fun ViewManager.linearLayout(@StyleRes theme: Int = 0): LinearLayout = linearLayout(theme, {})
-inline fun ViewManager.linearLayout(@StyleRes theme: Int = 0, init: _LinearLayout.() -> Unit): LinearLayout {
+inline fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
+inline fun ViewManager.linearLayout(@StyleRes theme: Int, init: _LinearLayout.() -> Unit): LinearLayout {
     return ankoView(theme, `$$Anko$Factories$Sdk15ViewGroup`.LINEAR_LAYOUT) { init() }
 }
 
 
-inline fun <T : View> ViewManager.ankoView(@StyleRes theme: Int = 0, factory: (ctx: Context) -> T, init: T.() -> Unit): T {
+inline fun <T : View> ViewManager.ankoView(@StyleRes theme: Int, factory: (ctx: Context) -> T, init: T.() -> Unit): T {
     var ctx = AnkoInternals.getContext(this)
     if (theme != 0 && (ctx !is ContextThemeWrapper || ctx.themeResId != theme)) {
         // If the context isn't a ContextThemeWrapper, or it is but does not have
