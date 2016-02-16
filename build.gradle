@@ -41,8 +41,11 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-}
 
+    lintOptions {
+        abortOnError false
+    }
+}
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
