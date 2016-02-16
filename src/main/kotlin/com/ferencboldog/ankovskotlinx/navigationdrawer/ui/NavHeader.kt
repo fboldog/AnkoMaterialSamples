@@ -1,4 +1,4 @@
-package com.ferencboldog.ankovskotlinx.ui
+package com.ferencboldog.ankovskotlinx.navigationdrawer.ui
 
 import android.os.Build
 import android.support.design.widget.NavigationView
@@ -10,7 +10,7 @@ import com.ferencboldog.ankovskotlinx.R
 import com.ferencboldog.ankovskotlinx.extensions.linearLayout
 import org.jetbrains.anko.*
 
-class NavigationHeader : AnkoComponent<NavigationView> {
+class NavHeader : AnkoComponent<NavigationView> {
     override fun createView(ui: AnkoContext<NavigationView>): View = with(ui) {
         linearLayout(R.style.ThemeOverlay_AppCompat_Dark) {
             orientation = LinearLayout.VERTICAL

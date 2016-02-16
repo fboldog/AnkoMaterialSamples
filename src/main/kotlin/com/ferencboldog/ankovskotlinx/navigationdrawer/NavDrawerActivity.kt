@@ -1,4 +1,4 @@
-package com.ferencboldog.ankovskotlinx
+package com.ferencboldog.ankovskotlinx.navigationdrawer
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -10,24 +10,25 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI
+import com.ferencboldog.ankovskotlinx.R
+import com.ferencboldog.ankovskotlinx.navigationdrawer.ui.NavDrawerUI
 
-import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI.Companion.DRAWER_ID
-import com.ferencboldog.ankovskotlinx.ui.MainAnkoUI.Companion.TOOLBAR_ID
+import com.ferencboldog.ankovskotlinx.navigationdrawer.ui.NavDrawerUI.Companion.DRAWER_ID
+import com.ferencboldog.ankovskotlinx.navigationdrawer.ui.NavDrawerUI.Companion.TOOLBAR_ID
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.debug
 
 import org.jetbrains.anko.find
 import org.jetbrains.anko.setContentView
 
-open class AnkoActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
+open class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
     lateinit var drawer: DrawerLayout
     lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainAnkoUI().setContentView(this)
+        NavDrawerUI().setContentView(this)
 
         drawer = find<DrawerLayout>(DRAWER_ID)
         toolbar = find<Toolbar>(TOOLBAR_ID)

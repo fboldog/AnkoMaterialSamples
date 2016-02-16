@@ -1,41 +1,42 @@
-package com.ferencboldog.ankovskotlinx.ui
+package com.ferencboldog.ankovskotlinx.navigationdrawer.ui
 
 import android.R
+import android.os.Build
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowInsets
 import com.ferencboldog.ankovskotlinx.*
-import com.ferencboldog.ankovskotlinx.extensions.appBarLayout
-import com.ferencboldog.ankovskotlinx.extensions.colorAttr
-import com.ferencboldog.ankovskotlinx.extensions.dimenAttr
-import com.ferencboldog.ankovskotlinx.extensions.snackbar
+import com.ferencboldog.ankovskotlinx.extensions.*
+import com.ferencboldog.ankovskotlinx.navigationdrawer.NavDrawerActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
 import org.jetbrains.anko.design.*
 import org.jetbrains.anko.support.v4.drawerLayout
 
 
-class MainAnkoUI: AnkoComponent<AnkoActivity> {
+class NavDrawerUI : AnkoComponent<NavDrawerActivity>, AnkoLogger {
 
     companion object {
-        val TOOLBAR_ID = View.generateViewId()
-        val DRAWER_ID = View.generateViewId()
+        val TOOLBAR_ID = AnkoViewCompat.compatGenerateViewId()
+        val DRAWER_ID = AnkoViewCompat.compatGenerateViewId()
     }
 
-    override fun createView(ui: AnkoContext<AnkoActivity>): View = with(ui) {
+    override fun createView(ui: AnkoContext<NavDrawerActivity>): View = with(ui) {
         drawerLayout {
             id = DRAWER_ID
             fitsSystemWindows = true
             setStatusBarBackgroundColor(colorAttr(com.ferencboldog.ankovskotlinx.R.attr.colorPrimaryDark))
-            setOnApplyWindowInsetsListener({ view: View, insets: WindowInsets ->
-                Log.d("DRAWER", "insets: ${insets.systemWindowInsetTop}")
-                this.setChildInsets(insets, insets.systemWindowInsetTop > 0)
-                return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
-            })
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                setOnApplyWindowInsetsListener({ view: View, insets: WindowInsets ->
+                    debug("insets: ${insets.systemWindowInsetTop}")
+                    this.setChildInsets(insets, insets.systemWindowInsetTop > 0)
+                    return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
+                })
+            }
 
             coordinatorLayout {
                 fitsSystemWindows = true
@@ -45,14 +46,17 @@ class MainAnkoUI: AnkoComponent<AnkoActivity> {
                         id = TOOLBAR_ID
                         backgroundColor = colorAttr(R.attr.colorPrimary)
                         popupTheme = com.ferencboldog.ankovskotlinx.R.style.AppTheme_PopupOverlay
-                    }.lparams(width = matchParent, height = ui.dimenAttr(R.attr.actionBarSize))
+                    }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize))
                 }.lparams(width = matchParent)
 
                 relativeLayout {
-                    topPadding = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_vertical_margin)
-                    bottomPadding = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_vertical_margin)
-                    leftPadding = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_horizontal_margin)
-                    rightPadding = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_horizontal_margin)
+                    val verticalMargin = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_vertical_margin)
+                    val horizontalMargin = dimen(com.ferencboldog.ankovskotlinx.R.dimen.activity_horizontal_margin)
+                    topPadding = verticalMargin
+                    rightPadding = horizontalMargin
+                    bottomPadding = verticalMargin
+                    leftPadding = horizontalMargin
+
                     textView("Hello World!")
                 }.lparams(width = matchParent, height = matchParent) {
                     behavior = AppBarLayout.ScrollingViewBehavior()
@@ -74,12 +78,20 @@ class MainAnkoUI: AnkoComponent<AnkoActivity> {
             navigationView {
                 fitsSystemWindows = true
                 val headerContext = AnkoContext.create(ctx, this);
-                val headerView = NavigationHeader().createView(headerContext).lparams(width = matchParent, height = dimen(com.ferencboldog.ankovskotlinx.R.dimen.nav_header_height))
+                val headerView = NavHeader()
+                        .createView(headerContext)
+                        .lparams(width = matchParent, height = dimen(com.ferencboldog.ankovskotlinx.R.dimen.nav_header_height))
                 addHeaderView(headerView)
                 inflateMenu(com.ferencboldog.ankovskotlinx.R.menu.activity_main_drawer)
-                setNavigationItemSelectedListener(ui.owner)
+                if(!isInEditMode) {
+                    setNavigationItemSelectedListener(ui.owner)
+                }
             }.lparams(height = matchParent) {
                 gravity = GravityCompat.START
+            }
+
+            if(isInEditMode){
+                openDrawer(GravityCompat.START)
             }
         }
     }
