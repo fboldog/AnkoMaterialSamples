@@ -6,49 +6,61 @@ import android.support.annotation.AttrRes
 import android.support.annotation.StyleRes
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.view.ContextThemeWrapper
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewManager
 import android.widget.LinearLayout
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko._LinearLayout
-import org.jetbrains.anko.`$$Anko$Factories$Sdk15ViewGroup`
+import org.jetbrains.anko.*
 import org.jetbrains.anko.design._AppBarLayout
 import org.jetbrains.anko.design.`$$Anko$Factories$DesignViewGroup`
 import org.jetbrains.anko.internals.AnkoInternals
-import org.jetbrains.anko.resources
+import java.util.concurrent.atomic.AtomicInteger
 
+fun Context.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = Snackbar.make(view, text, length).apply { snackbar() }.show()
+fun View.snackbar(text:  CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackbar(this, text, length, snackbar)
+fun Fragment.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackbar(view, text, length, snackbar)
 
-fun View.snackbar(text: CharSequence, length: Int = Snackbar.LENGTH_LONG, snackbar: Snackbar.() -> Unit) = Snackbar.make(this, text, length).apply { snackbar() }.show()
-
-fun AnkoContext<*>.attribute(@AttrRes attr : Int) : TypedValue {
-    var ret = TypedValue()
-    ctx.theme.resolveAttribute(attr, ret, true)
-    return ret
-}
-
-fun AnkoContext<*>.dimenAttr(@AttrRes attr : Int) : Int    {
-    return TypedValue.complexToDimensionPixelSize(attribute(attr).data, resources.displayMetrics)
-}
-
-fun AnkoContext<*>.colorAttr(@AttrRes attr: Int): Int {
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-        resources.getColor(attribute(attr).resourceId, ctx.theme)
-    } else {
-        resources.getColor(attribute(attr).resourceId)
+fun Context.attr(@AttrRes attribute: Int): TypedValue {
+        var typed = TypedValue()
+        ctx.theme.resolveAttribute(attribute, typed, true)
+        return typed
     }
+
+//returns px
+fun Context.dimenAttr(@AttrRes attribute: Int): Int = TypedValue.complexToDimensionPixelSize(attr(attribute).data, resources.displayMetrics)
+
+//returns color
+fun Context.colorAttr(@AttrRes attribute: Int): Int {
+    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            resources.getColor(attr(attribute).resourceId, ctx.theme)
+        } else {
+            resources.getColor(attr(attribute).resourceId)
+        }
 }
 
-inline fun ViewManager.appBarLayout(@StyleRes theme: Int): AppBarLayout = appBarLayout(theme, {})
+fun AnkoContext<*>.dimenAttr(@AttrRes attribute: Int): Int = ctx.dimenAttr(attribute)
+fun AnkoContext<*>.colorAttr(@AttrRes attribute: Int): Int = ctx.colorAttr(attribute)
+fun AnkoContext<*>.attribute(@AttrRes attribute: Int): TypedValue = ctx.attr(attribute)
+
+fun View.dimenAttr(@AttrRes attribute: Int): Int = context.dimenAttr(attribute)
+fun View.colorAttr(@AttrRes attribute: Int): Int = context.colorAttr(attribute)
+fun View.attr(@AttrRes attribute: Int): TypedValue = context.attr(attribute)
+
+fun Fragment.dimenAttr(@AttrRes attribute: Int): Int = activity.dimenAttr(attribute)
+fun Fragment.colorAttr(@AttrRes attribute: Int): Int = activity.colorAttr(attribute)
+fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity.attr(attribute)
+
+fun ViewManager.appBarLayout(@StyleRes theme: Int): AppBarLayout = appBarLayout(theme, {})
 inline fun ViewManager.appBarLayout(@StyleRes theme: Int, init: _AppBarLayout.() -> Unit): AppBarLayout {
     return ankoView(theme, `$$Anko$Factories$DesignViewGroup`.APP_BAR_LAYOUT) { init() }
 }
-inline fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
+
+fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
 inline fun ViewManager.linearLayout(@StyleRes theme: Int, init: _LinearLayout.() -> Unit): LinearLayout {
     return ankoView(theme, `$$Anko$Factories$Sdk15ViewGroup`.LINEAR_LAYOUT) { init() }
 }
-
 
 inline fun <T : View> ViewManager.ankoView(@StyleRes theme: Int, factory: (ctx: Context) -> T, init: T.() -> Unit): T {
     var ctx = AnkoInternals.getContext(this)
