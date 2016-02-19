@@ -81,3 +81,12 @@ inline fun <T : View> ViewManager.ankoView(@StyleRes theme: Int, factory: (ctx: 
     return view
 }
 
+private val defaultInit: Any.() -> Unit = {}
+fun <T : android.view.View> T.lparams(
+        width: kotlin.Int = wrapContent, height: kotlin.Int = wrapContent,
+        init: android.support.design.widget.CollapsingToolbarLayout.LayoutParams.() -> kotlin.Unit = defaultInit): T {
+    val layoutParams = android.support.design.widget.CollapsingToolbarLayout.LayoutParams(width, height)
+    layoutParams.init()
+    this@lparams.layoutParams = layoutParams
+    return this
+}
