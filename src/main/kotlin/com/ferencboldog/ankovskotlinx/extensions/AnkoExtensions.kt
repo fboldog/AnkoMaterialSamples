@@ -13,10 +13,10 @@ import android.view.View
 import android.view.ViewManager
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
+import org.jetbrains.anko.appcompat.v7._Toolbar
 import org.jetbrains.anko.design._AppBarLayout
 import org.jetbrains.anko.design.`$$Anko$Factories$DesignViewGroup`
 import org.jetbrains.anko.internals.AnkoInternals
-import java.util.concurrent.atomic.AtomicInteger
 
 fun Context.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = Snackbar.make(view, text, length).apply { snackbar() }.show()
 fun View.snackbar(text:  CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackbar(this, text, length, snackbar)
@@ -55,6 +55,11 @@ fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity.attr(attribute
 fun ViewManager.appBarLayout(@StyleRes theme: Int): AppBarLayout = appBarLayout(theme, {})
 inline fun ViewManager.appBarLayout(@StyleRes theme: Int, init: _AppBarLayout.() -> Unit): AppBarLayout {
     return ankoView(theme, `$$Anko$Factories$DesignViewGroup`.APP_BAR_LAYOUT) { init() }
+}
+
+fun ViewManager.toolbar(@StyleRes theme: Int): _Toolbar = toolbar(theme, {})
+inline fun ViewManager.toolbar(@StyleRes theme: Int, init: _Toolbar.() -> Unit): _Toolbar {
+    return ankoView(theme, { ctx: Context -> _Toolbar(ctx) }) { init() }
 }
 
 fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
