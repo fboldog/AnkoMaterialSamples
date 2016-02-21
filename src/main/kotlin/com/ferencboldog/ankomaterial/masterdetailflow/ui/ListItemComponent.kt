@@ -1,13 +1,12 @@
 package com.ferencboldog.ankomaterial.masterdetailflow.ui
 
 import android.os.Build
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout.HORIZONTAL
 import com.ferencboldog.ankomaterial.R
-import com.ferencboldog.ankomaterial.R.style.TextAppearance_AppCompat_Body1
 import com.ferencboldog.ankomaterial.extensions.AnkoViewCompat.generateViewId
+import com.ferencboldog.ankomaterial.extensions.attr
 import org.jetbrains.anko.*
 
 class ListItemComponent: AnkoComponent<ViewGroup> {
@@ -20,22 +19,23 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
         linearLayout {
             orientation = HORIZONTAL
+            val textAppearanceRes = attr(R.attr.textAppearanceListItem).resourceId
 
             textView {
                 id = IDENTIFIER_ID
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    setTextAppearance(TextAppearance_AppCompat_Body1)
+                    setTextAppearance(textAppearanceRes)
                 } else {
-                    setTextAppearance(this.context, TextAppearance_AppCompat_Body1)
+                    setTextAppearance(this.context, textAppearanceRes)
                 }
             }.lparams { margin = dimen(R.dimen.text_margin) }
 
             textView {
                 id = CONTENT_ID
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    setTextAppearance(TextAppearance_AppCompat_Body1)
+                    setTextAppearance(textAppearanceRes)
                 } else {
-                    setTextAppearance(this.context, TextAppearance_AppCompat_Body1)
+                    setTextAppearance(this.context, textAppearanceRes)
                 }
             }.lparams { margin = dimen(R.dimen.text_margin) }
         }
