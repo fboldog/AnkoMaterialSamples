@@ -8,6 +8,7 @@ import android.view.Gravity.BOTTOM
 import android.view.View
 import android.view.WindowInsets
 import com.ferencboldog.ankomaterial.*
+import com.ferencboldog.ankomaterial.R.style.AppTheme_PopupOverlay
 import com.ferencboldog.ankomaterial.extensions.*
 import com.ferencboldog.ankomaterial.extensions.AnkoViewCompat.generateViewId
 import com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity
@@ -45,15 +46,13 @@ class NavDrawerComponent : AnkoComponent<NavDrawerActivity>, AnkoLogger {
                     toolbar {
                         id = TOOLBAR_ID
                         backgroundColor = colorAttr(R.attr.colorPrimary)
-                        popupTheme = R.style.AppTheme_PopupOverlay
+                        popupTheme = AppTheme_PopupOverlay
                     }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize))
                 }.lparams(width = matchParent)
 
                 relativeLayout {
-                    val verticalMargin = dimen(R.dimen.activity_vertical_margin)
-                    val horizontalMargin = dimen(R.dimen.activity_horizontal_margin)
-                    horizontalPadding = horizontalMargin
-                    verticalPadding = verticalMargin
+                    horizontalPadding = dimen(R.dimen.activity_horizontal_margin)
+                    verticalPadding = dimen(R.dimen.activity_vertical_margin)
 
                     textView("Hello World!")
                 }.lparams(width = matchParent, height = matchParent) {
