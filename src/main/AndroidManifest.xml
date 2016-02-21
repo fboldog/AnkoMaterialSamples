@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ferencboldog.ankovskotlinx">
+    package="com.ferencboldog.ankomaterial">
 
     <application
         android:allowBackup="true"
@@ -9,8 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".AnkoActivity"
-            android:label="_Anko"
+        <activity android:name="com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity"
+            android:label="_NavDrawer"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,11 +19,29 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity"
+            android:label="_MDF List"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.ferencboldog.ankomaterial.masterdetailflow.DetailActivity"
+            android:label="@string/title_objectkind_detail"
+            android:parentActivityName="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity" />
         </activity>
 
     </application>

@@ -1,4 +1,4 @@
-package com.ferencboldog.ankovskotlinx.navigationdrawer.ui
+package com.ferencboldog.ankomaterial.navigationdrawer.ui
 
 import android.os.Build
 import android.support.design.widget.NavigationView
@@ -6,11 +6,11 @@ import android.support.v4.view.GravityCompat
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
-import com.ferencboldog.ankovskotlinx.R
-import com.ferencboldog.ankovskotlinx.extensions.linearLayout
+import com.ferencboldog.ankomaterial.R
+import com.ferencboldog.ankomaterial.extensions.linearLayout
 import org.jetbrains.anko.*
 
-class NavHeader : AnkoComponent<NavigationView> {
+class NavHeaderComponent : AnkoComponent<NavigationView> {
     override fun createView(ui: AnkoContext<NavigationView>): View = with(ui) {
         linearLayout(R.style.ThemeOverlay_AppCompat_Dark) {
             orientation = LinearLayout.VERTICAL

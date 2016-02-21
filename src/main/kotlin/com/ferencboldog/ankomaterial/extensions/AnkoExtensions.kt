@@ -1,4 +1,4 @@
-package com.ferencboldog.ankovskotlinx.extensions
+package com.ferencboldog.ankomaterial.extensions
 
 import android.content.Context
 import android.os.Build
