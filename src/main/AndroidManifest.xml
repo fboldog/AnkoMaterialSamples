@@ -9,9 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity"
-            android:label="_NavDrawer"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".launcher.LauncherActivity"
+                  android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -19,26 +18,20 @@
             </intent-filter>
         </activity>
 
+
+        <activity android:name="com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity"
+            android:label="@string/navigation_drawer_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity"
-            android:label="_MDF List"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/master_list_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.ferencboldog.ankomaterial.masterdetailflow.DetailActivity"
-            android:label="@string/title_objectkind_detail"
+            android:label="@string/detail_activity"
             android:parentActivityName="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity" />
