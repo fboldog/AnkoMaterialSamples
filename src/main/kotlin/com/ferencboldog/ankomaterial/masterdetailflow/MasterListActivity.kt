@@ -43,11 +43,11 @@ class MasterListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ListComponent().setContentView(this)
 
-        toolbar = find<Toolbar>(ListComponent.TOOLBAR)
+        toolbar = find<Toolbar>(ListComponent.TOOLBAR_ID)
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        fab = find<FloatingActionButton>(ListComponent.FAB)
+        fab = find<FloatingActionButton>(ListComponent.FAB_ID)
 
         fab.onClick {
             view -> snackbar(view!!, "Replace with your own action", Snackbar.LENGTH_LONG) {
@@ -55,7 +55,7 @@ class MasterListActivity : AppCompatActivity() {
             }
         }
 
-        recyclerView = find<RecyclerView>(ListComponent.LIST)
+        recyclerView = find<RecyclerView>(ListComponent.LIST_ID)
         setupRecyclerView(recyclerView)
     }
 
@@ -81,7 +81,7 @@ class MasterListActivity : AppCompatActivity() {
                     val fragment = DetailFragment().withArguments(
                             DetailFragment.ARG_ITEM_ID to holder.mItem!!.id
                     )
-                    supportFragmentManager.beginTransaction().replace(DetailComponent.DETAIL_CONTAINER, fragment).commit()
+                    supportFragmentManager.beginTransaction().replace(DetailComponent.DETAIL_CONTAINER_ID, fragment).commit()
                 } else {
                     startActivity(intentFor<DetailActivity>(DetailFragment.ARG_ITEM_ID to holder.mItem!!.id))
                 }
@@ -96,8 +96,8 @@ class MasterListActivity : AppCompatActivity() {
             var mItem: DummyContent.DummyItem? = null
 
             init {
-                mIdView = mView.find<TextView>(ListItemComponent.ID)
-                mContentView =  mView.find<TextView>(ListItemComponent.CONTENT)
+                mIdView = mView.find<TextView>(ListItemComponent.IDENTIFIER_ID)
+                mContentView =  mView.find<TextView>(ListItemComponent.CONTENT_ID)
             }
 
             override fun toString(): String = "${super.toString()} '${mContentView.text}'"

@@ -32,10 +32,10 @@ import org.jetbrains.anko.support.v4.nestedScrollView
 class DetailComponent: AnkoComponent<DetailActivity>, AnkoLogger {
 
     companion object {
-        val TOOLBAR_LAYOUT = generateViewId()
-        val TOOLBAR = generateViewId()
-        val DETAIL_CONTAINER = generateViewId()
-        val FAB = generateViewId()
+        val TOOLBAR_LAYOUT_ID = generateViewId()
+        val TOOLBAR_ID = generateViewId()
+        val DETAIL_CONTAINER_ID = generateViewId()
+        val FAB_ID = generateViewId()
     }
 
     fun collapseModeParams(): android.support.design.widget.CollapsingToolbarLayout.LayoutParams.() -> Unit = {collapseMode = COLLAPSE_MODE_PIN}
@@ -48,13 +48,13 @@ class DetailComponent: AnkoComponent<DetailActivity>, AnkoLogger {
                 fitsSystemWindows = true
 
                 collapsingToolbarLayout {
-                    id = TOOLBAR_LAYOUT
+                    id = TOOLBAR_LAYOUT_ID
                     fitsSystemWindows = true
 
                     contentScrim = ColorDrawable(colorAttr(R.attr.colorPrimary))
 
                     toolbar(ThemeOverlay_AppCompat_Dark_ActionBar) {
-                        id = TOOLBAR
+                        id = TOOLBAR_ID
                         popupTheme = ThemeOverlay_AppCompat_Light
                     }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize), init = collapseModeParams())
 
@@ -65,18 +65,18 @@ class DetailComponent: AnkoComponent<DetailActivity>, AnkoLogger {
             }.lparams(width = matchParent, height = dimen(R.dimen.app_bar_height))
 
             nestedScrollView {
-                id = DETAIL_CONTAINER
+                id = DETAIL_CONTAINER_ID
             }.lparams(width = matchParent, height = matchParent) {
                 behavior = AppBarLayout.ScrollingViewBehavior()
             }
 
             floatingActionButton {
-                id = FAB
+                id = FAB_ID
                 imageResource = android.R.drawable.stat_notify_chat
             }.lparams {
                 gravity = CENTER_VERTICAL or START
                 margin = dimen(R.dimen.fab_margin)
-                anchorId = DETAIL_CONTAINER
+                anchorId = DETAIL_CONTAINER_ID
                 anchorGravity = Gravity.TOP or Gravity.END
             }
         }

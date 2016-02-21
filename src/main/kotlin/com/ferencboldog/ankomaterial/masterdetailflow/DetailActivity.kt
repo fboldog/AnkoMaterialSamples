@@ -24,10 +24,10 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         DetailComponent().setContentView(this)
 
-        toolbar = find<Toolbar>(DetailComponent.TOOLBAR)
+        toolbar = find<Toolbar>(DetailComponent.TOOLBAR_ID)
         setSupportActionBar(toolbar)
 
-        fab = find<FloatingActionButton>(DetailComponent.FAB)
+        fab = find<FloatingActionButton>(DetailComponent.FAB_ID)
         fab.onClick {
             view -> snackbar(view!!, "Replace with your own detail action", Snackbar.LENGTH_LONG) {
                 setAction("Action", null).show()
@@ -53,7 +53,7 @@ class DetailActivity : AppCompatActivity() {
             val fragment = DetailFragment().withArguments(
                     DetailFragment.ARG_ITEM_ID to intent.getStringExtra(DetailFragment.ARG_ITEM_ID)
             )
-            supportFragmentManager.beginTransaction().add(DetailComponent.DETAIL_CONTAINER, fragment).commit()
+            supportFragmentManager.beginTransaction().add(DetailComponent.DETAIL_CONTAINER_ID, fragment).commit()
         }
     }
 

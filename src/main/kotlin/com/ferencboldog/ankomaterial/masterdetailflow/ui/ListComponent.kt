@@ -23,11 +23,11 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
 
     companion object {
-        val APP_BAR = generateViewId()
-        val TOOLBAR = generateViewId()
-        val FRAME_LAYOUT = generateViewId()
-        val FAB = generateViewId()
-        val LIST = generateViewId()
+        val APP_BAR_ID = generateViewId()
+        val TOOLBAR_ID = generateViewId()
+        val FRAME_LAYOUT_ID = generateViewId()
+        val FAB_ID = generateViewId()
+        val LIST_ID = generateViewId()
     }
 
     override fun createView(ui: AnkoContext<MasterListActivity>): View = with(ui) {
@@ -35,15 +35,15 @@ class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
             fitsSystemWindows = true
 
             appBarLayout(AppTheme_AppBarOverlay) {
-                id = APP_BAR
+                id = APP_BAR_ID
                 toolbar {
-                    id = TOOLBAR
+                    id = TOOLBAR_ID
                     popupTheme = AppTheme_PopupOverlay
                 }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize))
             }.lparams(width = matchParent)
 
             frameLayout {
-                id = FRAME_LAYOUT
+                id = FRAME_LAYOUT_ID
 
                 val config = ctx.resources?.configuration
                 debug("config.sw in dp: ${config?.screenWidthDp}")
@@ -57,14 +57,14 @@ class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
                         showDividers = SHOW_DIVIDER_MIDDLE
 
                         recyclerView {
-                            id = LIST
+                            id = LIST_ID
                             layoutManager = LinearLayoutManager(ctx, VERTICAL, false)
                         }.lparams(width = dimen(R.dimen.item_width), height = matchParent){
                             horizontalMargin = dip(16)
                         }
 
                         frameLayout {
-                            id = DetailComponent.DETAIL_CONTAINER
+                            id = DetailComponent.DETAIL_CONTAINER_ID
                         }.lparams(width = dip(0), height = matchParent){
                             weight = 3f
                         }
@@ -74,7 +74,7 @@ class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
                     }
                 } else {
                     recyclerView {
-                        id = LIST
+                        id = LIST_ID
                         layoutManager = LinearLayoutManager(ctx, VERTICAL, false)
                     }.lparams(width = dimen(R.dimen.item_width), height = matchParent){
                         horizontalMargin = dip(16)
@@ -86,7 +86,7 @@ class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
             }
 
             floatingActionButton {
-                id = FAB
+                id = FAB_ID
                 setImageResource(android.R.drawable.ic_dialog_email)
             }.lparams {
                 margin = dimen(R.dimen.fab_margin)

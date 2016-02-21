@@ -13,8 +13,8 @@ import org.jetbrains.anko.*
 class ListItemComponent: AnkoComponent<ViewGroup> {
 
     companion object {
-        val ID = generateViewId()
-        val CONTENT = generateViewId()
+        val IDENTIFIER_ID = generateViewId()
+        val CONTENT_ID = generateViewId()
     }
 
     override fun createView(ui: AnkoContext<ViewGroup>): View = with(ui) {
@@ -22,7 +22,7 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
             orientation = HORIZONTAL
 
             textView {
-                id = ID
+                id = IDENTIFIER_ID
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(TextAppearance_AppCompat_Body1)
                 } else {
@@ -31,7 +31,7 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
             }.lparams { margin = dimen(R.dimen.text_margin) }
 
             textView {
-                id = CONTENT
+                id = CONTENT_ID
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(TextAppearance_AppCompat_Body1)
                 } else {
