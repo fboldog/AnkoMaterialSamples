@@ -2,7 +2,6 @@ package com.ferencboldog.ankomaterial.navigationdrawer.ui
 
 import android.os.Build
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat.*
 import android.view.Gravity.BOTTOM
 import android.view.View
@@ -61,11 +60,7 @@ class NavDrawerComponent : AnkoComponent<NavDrawerActivity>, AnkoLogger {
 
                 floatingActionButton {
                     imageResource = android.R.drawable.ic_dialog_email
-                    onClick {
-                        snackbar("Replace with your own action", Snackbar.LENGTH_LONG) {
-                            setAction("Action") { toast("Clicked Snack") }
-                        }
-                    }
+                    onClick { view -> ui.owner.fabOnClick(view!!) }
                 }.lparams {
                     margin = dimen(R.dimen.fab_margin)
                     gravity = BOTTOM or END
