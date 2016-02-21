@@ -6,5 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="title_objectkind_detail">Object Kind Detail</string>
+    <string name="navigation_drawer_activity">Navigation Drawer</string>
+    <string name="master_list_activity">Master List</string>
+    <string name="detail_activity">Detail</string>
 </resources>
