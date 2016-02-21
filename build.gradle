@@ -30,7 +30,11 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    if(travisBuild) {
+        buildToolsVersion '23.0.1'
+    } else {
+        buildToolsVersion '23.0.2'
+    }
 
     defaultConfig {
         applicationId 'com.ferencboldog.ankomaterial'
@@ -44,6 +48,8 @@ android {
         incremental false
         if(travisBuild) {
             preDexLibraries = preDexEnabled && !travisBuild
+        } else {
+            preDexLibraries = true
         }
     }
 
