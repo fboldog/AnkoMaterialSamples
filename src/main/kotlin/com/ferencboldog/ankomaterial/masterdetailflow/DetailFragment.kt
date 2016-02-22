@@ -8,6 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ferencboldog.ankomaterial.R
+import com.ferencboldog.ankomaterial.masterdetailflow.ui.DetailComponent
+import com.ferencboldog.ankomaterial.masterdetailflow.ui.DetailTextComponent
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.find
 
 class DetailFragment : Fragment() {
 
@@ -19,7 +23,7 @@ class DetailFragment : Fragment() {
         val ARG_ITEM_ID = "item_id"
     }
 
-    var mItem: DummyContent.DummyItem? = null
+    lateinit var mItem: DummyContent.DummyItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +32,22 @@ class DetailFragment : Fragment() {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP[arguments.getString(ARG_ITEM_ID)]
+            mItem = DummyContent.ITEM_MAP[arguments.getString(ARG_ITEM_ID)]!!
 
-            val appBarLayout = activity.findViewById(R.id.toolbar_layout) as CollapsingToolbarLayout?
+            val appBarLayout: CollapsingToolbarLayout? = activity.find<CollapsingToolbarLayout>(DetailComponent.TOOLBAR_LAYOUT_ID)
             if (appBarLayout != null) {
-                appBarLayout.title = mItem?.content
+                appBarLayout.title = mItem.content
             }
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = LayoutInflater.from(context).inflate(R.layout.objectkind_detail, container, false)
-//        val rootView = inflater!!.inflate(R.layout.objectkind_detail, container, false)
+        val view = DetailTextComponent().createView(AnkoContext.create(context, this)) as TextView
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            (rootView.findViewById(R.id.objectkind_detail_text) as TextView).setText(mItem?.details)
-        }
+        view.text = mItem.details
 
-        return rootView
+        return view
     }
 }
