@@ -3,8 +3,11 @@ package com.ferencboldog.ankomaterial.navigationdrawer.ui
 import android.os.Build
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.GravityCompat.*
+import android.support.v4.widget.DrawerLayout
 import android.view.Gravity.BOTTOM
 import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 import android.view.WindowInsets
 import com.ferencboldog.ankomaterial.*
 import com.ferencboldog.ankomaterial.R.style.AppTheme_PopupOverlay
@@ -28,12 +31,14 @@ class NavDrawerComponent : AnkoComponent<NavDrawerActivity>, AnkoLogger {
         drawerLayout {
             id = DRAWER_ID
             fitsSystemWindows = true
-            setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimaryDark))
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                setOnApplyWindowInsetsListener({ view: View, insets: WindowInsets ->
-                    debug("insets: ${insets.systemWindowInsetTop}")
-                    this.setChildInsets(insets, insets.systemWindowInsetTop > 0)
+                setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimary))
+                setOnApplyWindowInsetsListener({ v: View, insets: WindowInsets ->
+                    val draw = insets.systemWindowInsetTop > 0
+                    if (v is DrawerLayout) {
+                        v.setChildInsets(insets, draw)
+                    }
                     return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
                 })
             }
