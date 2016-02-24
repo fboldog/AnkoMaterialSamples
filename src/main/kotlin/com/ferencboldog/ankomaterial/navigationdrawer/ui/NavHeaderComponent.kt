@@ -32,6 +32,7 @@ class NavHeaderComponent : AnkoComponent<NavigationView> {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(TextAppearance_AppCompat_Body1)
                 } else {
+                    @Suppress("DEPRECATION")
                     setTextAppearance(this.context, TextAppearance_AppCompat_Body1)
                 }
             }

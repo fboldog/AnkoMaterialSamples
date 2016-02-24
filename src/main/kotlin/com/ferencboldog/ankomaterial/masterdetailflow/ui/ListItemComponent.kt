@@ -26,6 +26,7 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(textAppearanceRes)
                 } else {
+                    @Suppress("DEPRECATION")
                     setTextAppearance(this.context, textAppearanceRes)
                 }
             }.lparams { margin = dimen(R.dimen.text_margin) }
@@ -35,6 +36,7 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     setTextAppearance(textAppearanceRes)
                 } else {
+                    @Suppress("DEPRECATION")
                     setTextAppearance(this.context, textAppearanceRes)
                 }
             }.lparams { margin = dimen(R.dimen.text_margin) }

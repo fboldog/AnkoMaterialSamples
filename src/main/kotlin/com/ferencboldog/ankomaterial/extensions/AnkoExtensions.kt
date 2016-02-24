@@ -36,6 +36,7 @@ fun Context.colorAttr(@AttrRes attribute: Int): Int {
     return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             resources.getColor(attr(attribute).resourceId, ctx.theme)
         } else {
+            @Suppress("DEPRECATION")
             resources.getColor(attr(attribute).resourceId)
         }
 }
