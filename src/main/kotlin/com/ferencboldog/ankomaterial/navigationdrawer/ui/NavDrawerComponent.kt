@@ -33,7 +33,8 @@ class NavDrawerComponent : AnkoComponent<NavDrawerActivity>, AnkoLogger {
             fitsSystemWindows = true
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimary))
+                setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimaryDark))
+                systemUiVisibility = SYSTEM_UI_FLAG_LAYOUT_STABLE or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 setOnApplyWindowInsetsListener({ v: View, insets: WindowInsets ->
                     val draw = insets.systemWindowInsetTop > 0
                     if (v is DrawerLayout) {
