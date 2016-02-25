@@ -38,8 +38,6 @@ class DetailComponent: AnkoComponent<DetailActivity>, AnkoLogger {
         val FAB_ID = generateViewId()
     }
 
-    fun collapseModeParams(): android.support.design.widget.CollapsingToolbarLayout.LayoutParams.() -> Unit = {collapseMode = COLLAPSE_MODE_PIN}
-
     override fun createView(ui: AnkoContext<DetailActivity>): View = with(ui) {
         coordinatorLayout {
             fitsSystemWindows = true
@@ -56,7 +54,7 @@ class DetailComponent: AnkoComponent<DetailActivity>, AnkoLogger {
                     toolbar(ThemeOverlay_AppCompat_Dark_ActionBar) {
                         id = TOOLBAR_ID
                         popupTheme = ThemeOverlay_AppCompat_Light
-                    }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize), init = collapseModeParams())
+                    }.lparams(width = matchParent, height = dimenAttr(R.attr.actionBarSize), init = collapseModePin())
 
                 }.lparams(width = matchParent, height = matchParent) {
                     scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED

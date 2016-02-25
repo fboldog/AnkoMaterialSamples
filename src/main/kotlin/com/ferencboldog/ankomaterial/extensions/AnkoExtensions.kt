@@ -5,6 +5,7 @@ import android.os.Build
 import android.support.annotation.AttrRes
 import android.support.annotation.StyleRes
 import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.view.ContextThemeWrapper
@@ -17,6 +18,8 @@ import org.jetbrains.anko.appcompat.v7._Toolbar
 import org.jetbrains.anko.design._AppBarLayout
 import org.jetbrains.anko.design.`$$Anko$Factories$DesignViewGroup`
 import org.jetbrains.anko.internals.AnkoInternals
+
+fun collapseModePin(): android.support.design.widget.CollapsingToolbarLayout.LayoutParams.() -> Unit = {collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN }
 
 fun Context.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = Snackbar.make(view, text, length).apply { snackbar() }.show()
 fun View.snackbar(text:  CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackbar(this, text, length, snackbar)
