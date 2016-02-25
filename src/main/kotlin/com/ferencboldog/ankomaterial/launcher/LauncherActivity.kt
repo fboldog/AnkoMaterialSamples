@@ -56,8 +56,10 @@ class LauncherActivity: AppCompatActivity() {
 
         init {
             button.onClick { view ->
-                val cls = view?.tag as Class<out Activity>
-                startActivity(Intent(view?.context, cls))
+                val cls = view!!.tag
+                if(cls is Class<*>) {
+                    startActivity(Intent(view.context, cls))
+                }
             }
         }
     }
