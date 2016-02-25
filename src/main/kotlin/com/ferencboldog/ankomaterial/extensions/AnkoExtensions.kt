@@ -15,6 +15,7 @@ import android.view.ViewManager
 import android.widget.LinearLayout
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7._Toolbar
+import org.jetbrains.anko.appcompat.v7.`$$Anko$Factories$AppcompatV7ViewGroup`
 import org.jetbrains.anko.design._AppBarLayout
 import org.jetbrains.anko.design.`$$Anko$Factories$DesignViewGroup`
 import org.jetbrains.anko.internals.AnkoInternals
@@ -63,7 +64,7 @@ inline fun ViewManager.appBarLayout(@StyleRes theme: Int, init: _AppBarLayout.()
 
 fun ViewManager.toolbar(@StyleRes theme: Int): _Toolbar = toolbar(theme, {})
 inline fun ViewManager.toolbar(@StyleRes theme: Int, init: _Toolbar.() -> Unit): _Toolbar {
-    return ankoView(theme, { ctx: Context -> _Toolbar(ctx) }) { init() }
+    return ankoView(theme, `$$Anko$Factories$AppcompatV7ViewGroup`.TOOLBAR) { init() }
 }
 
 fun ViewManager.linearLayout(@StyleRes theme: Int): LinearLayout = linearLayout(theme, {})
