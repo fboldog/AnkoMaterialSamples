@@ -15,6 +15,7 @@ import com.ferencboldog.ankomaterial.launcher.ui.LauncherComponent.Companion.LIS
 import com.ferencboldog.ankomaterial.launcher.ui.LauncherItemComponent
 import com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity
 import com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity
+import com.ferencboldog.ankomaterial.scrolling.ScrollingActivity
 import org.jetbrains.anko.*
 
 class LauncherActivity: AppCompatActivity() {
@@ -28,7 +29,8 @@ class LauncherActivity: AppCompatActivity() {
         list.adapter = Adapter(
                 listOf(
                         "Navigation Drawer" to NavDrawerActivity::class.java,
-                        "Master-Detail Flow" to MasterListActivity::class.java
+                        "Master-Detail Flow" to MasterListActivity::class.java,
+                        "Scrolling" to ScrollingActivity::class.java
                 )
         )
     }

@@ -37,6 +37,12 @@
                 android:value="com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity" />
         </activity>
 
+        <activity android:name="com.ferencboldog.ankomaterial.scrolling.ScrollingActivity"
+                  android:label="@string/scrolling_activity"
+                  android:theme="@style/AppTheme.NoActionBar" />
+
+
+
     </application>
 
 </manifest>
