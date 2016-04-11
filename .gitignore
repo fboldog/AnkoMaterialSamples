@@ -7,4 +7,5 @@
 /captures
 !gradle-wrapper-jar
 .gradletasknamecache
-
+.kobalt/
+kobaltBuild/
