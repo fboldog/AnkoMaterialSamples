@@ -25,7 +25,7 @@ val p = project {
     dependencies {
         val support = listOf("appcompat-v7", "design", "support-v4", "recyclerview-v7")
         support.forEach { name ->
-            compile("com.android.support:$name:aar:$supportVersion")
+            compile("com.android.support:$name:$supportVersion")
         }
 
         val anko = listOf("sdk15", "support-v4", "design", "appcompat-v7", "recyclerview-v7")
