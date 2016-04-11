@@ -3,7 +3,7 @@ import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.android.*
 import com.beust.kobalt.plugin.java.*
 
-val pl = plugins("com.beust:kobalt-android:0.81")
+val pl = plugins("com.beust:kobalt-android:0.82")
 
 val kotlinVersion = "1.0.2-eap-15"
 val ankoVersion = "0.8.3"
