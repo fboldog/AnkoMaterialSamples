@@ -5,15 +5,18 @@ ext {
 }
 
 buildscript {
-    ext.kotlinVersion = '1.0.0'
+    ext.kotlinVersion = '1.0.2-eap-15'
     ext.ankoVersion = '0.8.3'
-    ext.supportVersion = '23.2.0'
+    ext.supportVersion = '23.3.0'
     repositories {
         jcenter()
+        maven {
+            url 'https://dl.bintray.com/kotlin/kotlin-eap'
+        }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-beta6'
+        classpath 'com.android.tools.build:gradle:2.1.0-alpha5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
@@ -21,6 +24,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url 'https://dl.bintray.com/kotlin/kotlin-eap'
+        }
     }
 }
 
@@ -33,7 +39,7 @@ android {
     if(travisBuild) {
         buildToolsVersion '23.0.1'
     } else {
-        buildToolsVersion '23.0.2'
+        buildToolsVersion '23.0.3'
     }
 
     defaultConfig {
@@ -54,7 +60,13 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main {
+            java.srcDirs += 'src/main/kotlin'
+        }
+        test {
+            java.srcDirs += 'src/test/kotlin'
+        }
+    }
     }
 
     lintOptions {
@@ -65,15 +77,15 @@ android {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    compile "com.android.support:appcompat-v7:$supportVersion"
-    compile "com.android.support:design:$supportVersion"
-    compile "com.android.support:support-v4:$supportVersion"
-    compile "com.android.support:recyclerview-v7:$supportVersion"
+    def support = ['appcompat-v7', 'design', 'support-v4', 'recyclerview-v7']
+    support.each { name ->
+        compile "com.android.support:$name:$supportVersion"
+    }
 
-//    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "org.jetbrains.anko:anko-sdk15:$ankoVersion"
-    compile "org.jetbrains.anko:anko-support-v4:$ankoVersion"
-    compile "org.jetbrains.anko:anko-design:$ankoVersion"
-    compile "org.jetbrains.anko:anko-appcompat-v7:$ankoVersion"
-    compile "org.jetbrains.anko:anko-recyclerview-v7:$ankoVersion"
+    def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7']
+    anko.each { name ->
+        compile "org.jetbrains.anko:anko-$name:$ankoVersion"
+    }
+
+
 }
