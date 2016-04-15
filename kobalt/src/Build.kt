@@ -3,7 +3,7 @@ import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.android.*
 import com.beust.kobalt.plugin.java.*
 
-val pl = plugins("com.beust:kobalt-android:0.83")
+val pl = plugins("com.beust:kobalt-android:0.86")
 
 val kotlinVersion = "1.0.2-eap-15"
 val ankoVersion = "0.8.3"
@@ -28,7 +28,7 @@ val p = project {
             compile("com.android.support:$name:$supportVersion")
         }
 
-        val anko = listOf("sdk15", "support-v4", "design", "appcompat-v7", "recyclerview-v7")
+        val anko = listOf("sdk15", "support-v4", "design", "appcompat-v7", "recyclerview-v7", "common")
         anko.forEach { name ->
             compile("org.jetbrains.anko:anko-$name:$ankoVersion")
         }
