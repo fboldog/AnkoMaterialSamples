@@ -36,11 +36,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
-    if (travisBuild) {
-        buildToolsVersion '24.0.0'
-    } else {
-        buildToolsVersion '24.0.1'
-    }
+    buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId 'com.ferencboldog.ankomaterial'
