@@ -8,7 +8,6 @@ import android.widget.LinearLayout.*
 import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.R.style.TextAppearance_AppCompat_Body1
 import com.ferencboldog.ankomaterial.R.style.ThemeOverlay_AppCompat_Dark
-import com.ferencboldog.ankomaterial.extensions.linearLayout
 import org.jetbrains.anko.*
 
 class NavHeaderComponent : AnkoComponent<NavigationView> {

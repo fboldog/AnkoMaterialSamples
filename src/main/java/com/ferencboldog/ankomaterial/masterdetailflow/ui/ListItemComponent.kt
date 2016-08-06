@@ -42,5 +42,4 @@ class ListItemComponent: AnkoComponent<ViewGroup> {
             }.lparams { margin = dimen(R.dimen.text_margin) }
         }
     }
-
 }

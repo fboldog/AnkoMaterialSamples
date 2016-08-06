@@ -11,11 +11,11 @@ import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.R.style.AppTheme_AppBarOverlay
 import com.ferencboldog.ankomaterial.R.style.AppTheme_PopupOverlay
 import com.ferencboldog.ankomaterial.extensions.AnkoViewCompat.generateViewId
-import com.ferencboldog.ankomaterial.extensions.appBarLayout
 import com.ferencboldog.ankomaterial.extensions.dimenAttr
 import com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.toolbar
+import org.jetbrains.anko.design.appBarLayout
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
@@ -87,7 +87,7 @@ class ListComponent: AnkoComponent<MasterListActivity>, AnkoLogger {
 
             floatingActionButton {
                 id = FAB_ID
-                setImageResource(android.R.drawable.ic_dialog_email)
+                imageResource = android.R.drawable.ic_dialog_email
             }.lparams {
                 margin = dimen(R.dimen.fab_margin)
                 gravity = BOTTOM or END
