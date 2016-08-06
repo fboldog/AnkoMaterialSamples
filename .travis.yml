@@ -2,8 +2,14 @@ language: android
 android:
   components:
     - platform-tools
-    - build-tools-23.0.1
-    - android-23
+    - build-tools-24.0.1
+    - android-24
     - extra-android-m2repository
 script:
-   - ./gradlew build
+  - ./gradlew build
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
