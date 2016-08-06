@@ -1,28 +1,31 @@
 package com.ferencboldog.ankomaterial.scrolling
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewManager
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.extensions.snackbar
 import com.ferencboldog.ankomaterial.scrolling.ui.ScrollingComponent
-import org.jetbrains.anko.find
-import org.jetbrains.anko.onClick
-import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.*
+import org.jetbrains.anko.custom.ankoView
 
 class ScrollingActivity: AppCompatActivity() {
+    val ui = ScrollingComponent()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ScrollingComponent().setContentView(this)
+        ui.setContentView(this)
 
-        val toolbar = find<Toolbar>(ScrollingComponent.TOOLBAR_ID)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(ui.toolbar)
 
-        val fab = find<FloatingActionButton>(ScrollingComponent.FAB_ID)
-        fab.onClick {
+        ui.fab.onClick {
             snackbar(view = it!!, text = "Replace with your own action") {
                 setAction("Action", null)
             }

@@ -78,7 +78,9 @@ open class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationI
 
     fun fabOnClick(view: View){
         snackbar(view, "Replace with your own action", Snackbar.LENGTH_LONG) {
-            setAction("Action") { toast("Clicked Snack") }
+            setAction("Action") {
+                toast("Clicked Snack")
+            }
         }
     }
 }

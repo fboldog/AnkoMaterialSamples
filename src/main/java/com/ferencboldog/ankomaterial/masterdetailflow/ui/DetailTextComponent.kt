@@ -2,7 +2,7 @@ package com.ferencboldog.ankomaterial.masterdetailflow.ui
 
 import android.view.View
 import com.ferencboldog.ankomaterial.extensions.AnkoViewCompat.generateViewId
-import com.ferencboldog.ankomaterial.extensions.lparams
+import com.ferencboldog.ankomaterial.extensions.FrameLayout.lparams
 import com.ferencboldog.ankomaterial.masterdetailflow.DetailFragment
 import org.jetbrains.anko.*
 
