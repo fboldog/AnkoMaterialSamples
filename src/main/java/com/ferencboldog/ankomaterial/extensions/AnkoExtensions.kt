@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.util.TypedValue
 import android.view.View
+import android.widget.FrameLayout
 
 import org.jetbrains.anko.*
 
@@ -49,13 +50,24 @@ fun Fragment.colorAttr(@AttrRes attribute: Int): Int = activity.colorAttr(attrib
 fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity.attr(attribute)
 
 
-private val defaultInit: Any.() -> Unit = {}
-fun <T : android.view.View> T.lparams(
-        width: kotlin.Int = wrapContent, height: kotlin.Int = wrapContent,
-        init: android.support.design.widget.CollapsingToolbarLayout.LayoutParams.() -> kotlin.Unit = defaultInit): T {
-    val layoutParams = android.support.design.widget.CollapsingToolbarLayout.LayoutParams(width, height)
-    layoutParams.init()
-    this@lparams.layoutParams = layoutParams
-    return this
+object FrameLayout {
+    fun <T : View> T.lparams(
+            width: kotlin.Int = wrapContent, height: kotlin.Int = wrapContent,
+            init: FrameLayout.LayoutParams.() -> kotlin.Unit = {}): T {
+        val layoutParams = FrameLayout.LayoutParams(width, height)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
 }
 
+object CollapsingToolbar {
+    fun <T : View> T.lparams(
+            width: kotlin.Int = wrapContent, height: kotlin.Int = wrapContent,
+            init: CollapsingToolbarLayout.LayoutParams.() -> kotlin.Unit = {}): T {
+        val layoutParams = CollapsingToolbarLayout.LayoutParams(width, height)
+        layoutParams.init()
+        this@lparams.layoutParams = layoutParams
+        return this
+    }
+}
