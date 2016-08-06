@@ -1,72 +1,68 @@
-ext {
-    travisBuild = System.getenv("TRAVIS") == "true"
-    // allows for -Dpre-dex=false to be set
-    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
-}
-
 buildscript {
-    ext.kotlinVersion = '1.0.2-eap-15'
-    ext.ankoVersion = '0.8.3'
-    ext.supportVersion = '23.3.0'
+    apply from: 'https://git.io/kotlinEAP'
+
+    ext.localAnko = true
+    ext.travisBuild = System.getenv("TRAVIS") == "true"
+    // allows for -Dpre-dex=false to be set
+    ext.preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+
+    ext.kotlinVersion = '1.0.4-eap-62'
+    ext.ankoVersion = '0.9'
+    ext.supportVersion = '24.1.0'
+
     repositories {
         jcenter()
-        maven {
-            url 'https://dl.bintray.com/kotlin/kotlin-eap'
-        }
+        kotlinEAP(it)
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0-alpha5'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
-        maven {
-            url 'https://dl.bintray.com/kotlin/kotlin-eap'
+        flatDir {
+            dirs "$rootProject.projectDir/libs"
         }
+        jcenter()
+        kotlinEAP(it)
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 23
-    if(travisBuild) {
-        buildToolsVersion '23.0.1'
+    compileSdkVersion 24
+    if (travisBuild) {
+        buildToolsVersion '24.0.0'
     } else {
-        buildToolsVersion '23.0.3'
+        buildToolsVersion '24.0.1'
     }
 
     defaultConfig {
         applicationId 'com.ferencboldog.ankomaterial'
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName '1.0'
     }
 
     dexOptions {
-        incremental false
-        if(travisBuild) {
+        if (travisBuild) {
+            incremental false
             preDexLibraries = preDexEnabled && !travisBuild
         } else {
+            incremental true
             preDexLibraries = true
         }
     }
 
-    sourceSets {
-        main {
-            java.srcDirs += 'src/main/kotlin'
-        }
-        // test {
-        //     java.srcDirs += 'src/test/kotlin'
-        // }
-    }
+//     testOptions {
+//         unitTests.returnDefaultValues = true
+//     }
 
     lintOptions {
         abortOnError false
@@ -76,15 +72,24 @@ android {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    def support = ['appcompat-v7', 'design', 'support-v4', 'recyclerview-v7']
+    def support = ['appcompat-v7', 'design', 'support-v4', 'recyclerview-v7', 'percent', 'cardview-v7']
     support.each { name ->
         compile "com.android.support:$name:$supportVersion"
     }
 
-    def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7']
+    def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7', 'percent', 'cardview-v7']
+
+    if (localAnko) anko.add('common')
+
     anko.each { name ->
-        compile "org.jetbrains.anko:anko-$name:$ankoVersion"
+        if(localAnko) {
+            compile name: "anko-${name}"
+        } else {
+            compile "org.jetbrains.anko:anko-$name:$ankoVersion"
+        }
     }
 
-
+    // testCompile 'junit:junit:4.12'
+    // testCompile 'org.assertj:assertj-core:2.4.0'
+    // testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
 }
