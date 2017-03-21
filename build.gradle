@@ -1,18 +1,14 @@
 buildscript {
-    apply from: 'https://git.io/kotlinEAP'
-
-    ext.localAnko = true
     ext.travisBuild = System.getenv("TRAVIS") == "true"
     // allows for -Dpre-dex=false to be set
     ext.preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
-    ext.kotlinVersion = '1.0.4-eap-62'
     ext.ankoVersion = '0.9'
     ext.supportVersion = '24.1.0'
+    ext.kotlinVersion = '1.1.1'
 
     repositories {
         jcenter()
-        kotlinEAP(it)
     }
 
     dependencies {
@@ -23,11 +19,7 @@ buildscript {
 
 allprojects {
     repositories {
-        flatDir {
-            dirs "$rootProject.projectDir/libs"
-        }
         jcenter()
-        kotlinEAP(it)
     }
 }
 
@@ -75,14 +67,8 @@ dependencies {
 
     def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7', 'percent', 'cardview-v7']
 
-    if (localAnko) anko.add('common')
-
     anko.each { name ->
-        if(localAnko) {
-            compile name: "anko-${name}"
-        } else {
-            compile "org.jetbrains.anko:anko-$name:$ankoVersion"
-        }
+        compile "org.jetbrains.anko:anko-$name:$ankoVersion"
     }
 
     // testCompile 'junit:junit:4.12'
