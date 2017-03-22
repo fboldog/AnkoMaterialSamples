@@ -38,23 +38,6 @@ class ScrollingComponent: AnkoComponent<ScrollingActivity> {
             fitsSystemWindows = true
             setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimaryDark))
 
-//            setOnApplyWindowInsetsListener({view, insets ->
-//                if(view is CoordinatorLayout){
-//                    view.apply {
-//                        setStatusBarBackgroundColor(colorAttr(R.attr.colorPrimaryDark))
-//                        systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                        val params = layoutParams as FrameLayout.LayoutParams
-//                        params.topMargin = insets.systemWindowInsetTop
-//                        layoutParams = params
-//                        setWillNotDraw(true)
-//                        invalidate()
-//                        forceLayout()
-//                    }
-//                }
-//
-//                return@setOnApplyWindowInsetsListener insets.consumeSystemWindowInsets()
-//            })
-//
 
             appBarLayout(R.style.AppTheme_AppBarOverlay) {
                 id = APP_BAR_ID
