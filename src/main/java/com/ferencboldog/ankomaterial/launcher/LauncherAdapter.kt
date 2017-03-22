@@ -10,7 +10,7 @@ import com.ferencboldog.ankomaterial.launcher.ui.LauncherItemComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.onClick
 
-class LauncherAdapter(val items: List<Pair<String, Class<out Activity>>>): RecyclerView.Adapter<LauncherViewHolder>() {
+class LauncherAdapter(val items: List<Pair<String, Class<out Activity>>>) : RecyclerView.Adapter<LauncherViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LauncherViewHolder? {
         val ui = LauncherItemComponent()
@@ -27,9 +27,9 @@ class LauncherAdapter(val items: List<Pair<String, Class<out Activity>>>): Recyc
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(viewHolder: LauncherViewHolder, position: Int) = with(viewHolder.button) {
-            text = items[position].first
-            tag = items[position].second
+        text = items[position].first
+        tag = items[position].second
     }
 }
 
-class LauncherViewHolder(view: View, val button: Button): RecyclerView.ViewHolder(view)
+class LauncherViewHolder(view: View, val button: Button) : RecyclerView.ViewHolder(view)

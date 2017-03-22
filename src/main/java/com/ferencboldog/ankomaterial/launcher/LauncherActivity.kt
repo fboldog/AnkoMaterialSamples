@@ -6,23 +6,22 @@ import com.ferencboldog.ankomaterial.launcher.ui.LauncherComponent
 import com.ferencboldog.ankomaterial.masterdetailflow.MasterListActivity
 import com.ferencboldog.ankomaterial.navigationdrawer.NavDrawerActivity
 import com.ferencboldog.ankomaterial.scrolling.ScrollingActivity
-import org.jetbrains.anko.*
+import org.jetbrains.anko.setContentView
 
-class LauncherActivity: AppCompatActivity() {
+class LauncherActivity : AppCompatActivity() {
     val adapter = LauncherAdapter(
-            listOf(
-                    "Navigation Drawer" to NavDrawerActivity::class.java,
-                    "Master-Detail Flow" to MasterListActivity::class.java,
-                    "Scrolling" to ScrollingActivity::class.java
-            )
+        listOf(
+            "Navigation Drawer" to NavDrawerActivity::class.java,
+            "Master-Detail Flow" to MasterListActivity::class.java,
+            "Scrolling" to ScrollingActivity::class.java
+        )
     )
 
     val ui = LauncherComponent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val ui = LauncherComponent()
-        ui.setContentView(this@LauncherActivity)
+        ui.setContentView(this)
         ui.list.adapter = adapter
     }
 }

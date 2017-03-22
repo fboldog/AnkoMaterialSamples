@@ -7,42 +7,39 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.extensions.snackbar
 import com.ferencboldog.ankomaterial.navigationdrawer.ui.NavDrawerComponent
-
-import com.ferencboldog.ankomaterial.navigationdrawer.ui.NavDrawerComponent.Companion.DRAWER_ID
-import com.ferencboldog.ankomaterial.navigationdrawer.ui.NavDrawerComponent.Companion.TOOLBAR_ID
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.debug
+import org.jetbrains.anko.setContentView
+import org.jetbrains.anko.toast
 
 open class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
 
+    val ui = NavDrawerComponent()
     lateinit var drawer: DrawerLayout
-    lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        NavDrawerComponent().setContentView(this)
+        ui.setContentView(this)
 
-        drawer = find<DrawerLayout>(DRAWER_ID)
-        toolbar = find<Toolbar>(TOOLBAR_ID)
+        drawer = ui.drawer
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(ui.toolbar)
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+            this, drawer, ui.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
 
         toggle.syncState()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.nav_camera -> debug("-> camera")
             R.id.nav_gallery -> debug("-> gallery")
             R.id.nav_slideshow -> debug("-> slideshow")
@@ -61,7 +58,7 @@ open class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationI
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if(item.itemId == R.id.action_settings) {
+        return if (item.itemId == R.id.action_settings) {
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -76,7 +73,7 @@ open class NavDrawerActivity : AppCompatActivity(), NavigationView.OnNavigationI
         }
     }
 
-    fun fabOnClick(view: View){
+    fun fabOnClick(view: View) {
         snackbar(view, "Replace with your own action", Snackbar.LENGTH_LONG) {
             setAction("Action") {
                 toast("Clicked Snack")

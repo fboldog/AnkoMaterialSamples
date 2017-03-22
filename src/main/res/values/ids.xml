@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="detail_container" type="id"/>
+    <item name="scrolling_component_appbar" type="id"/>
+    <item name="detail_collapsing_toolbar" type="id"/>
+</resources>

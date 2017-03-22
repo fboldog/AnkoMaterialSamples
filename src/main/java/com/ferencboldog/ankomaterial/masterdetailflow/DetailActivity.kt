@@ -1,14 +1,12 @@
 package com.ferencboldog.ankomaterial.masterdetailflow
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.extensions.snackbar
 import com.ferencboldog.ankomaterial.masterdetailflow.ui.DetailComponent
-import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.onClick
 
@@ -17,19 +15,18 @@ import org.jetbrains.anko.support.v4.withArguments
 
 class DetailActivity : AppCompatActivity() {
 
-    lateinit var toolbar: Toolbar
-    lateinit var fab: FloatingActionButton
+    lateinit var ui: DetailComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DetailComponent().setContentView(this)
+        ui = DetailComponent()
+        ui.setContentView(this)
 
-        toolbar = find<Toolbar>(DetailComponent.TOOLBAR_ID)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(ui.toolbar)
 
-        fab = find<FloatingActionButton>(DetailComponent.FAB_ID)
-        fab.onClick {
-            view -> snackbar(view!!, "Replace with your own detail action", Snackbar.LENGTH_LONG) {
+        ui.fab.onClick {
+            view ->
+            snackbar(view!!, "Replace with your own detail action", Snackbar.LENGTH_LONG) {
                 setAction("Action", null).show()
             }
         }
@@ -51,14 +48,14 @@ class DetailActivity : AppCompatActivity() {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             val fragment = DetailFragment().withArguments(
-                    DetailFragment.ARG_ITEM_ID to intent.getStringExtra(DetailFragment.ARG_ITEM_ID)
+                DetailFragment.ARG_ITEM_ID to intent.getStringExtra(DetailFragment.ARG_ITEM_ID)
             )
-            supportFragmentManager.beginTransaction().add(DetailComponent.DETAIL_CONTAINER_ID, fragment).commit()
+            supportFragmentManager.beginTransaction().add(R.id.detail_container, fragment).commit()
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> {
                 navigateUpTo(intentFor<MasterListActivity>())
                 return true

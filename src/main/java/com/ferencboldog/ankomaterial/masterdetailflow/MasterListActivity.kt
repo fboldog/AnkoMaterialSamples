@@ -1,22 +1,20 @@
 package com.ferencboldog.ankomaterial.masterdetailflow
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.extensions.snackbar
-import com.ferencboldog.ankomaterial.masterdetailflow.ui.DetailComponent
 import com.ferencboldog.ankomaterial.masterdetailflow.ui.ListComponent
 import com.ferencboldog.ankomaterial.masterdetailflow.ui.ListItemComponent
-import org.jetbrains.anko.*
-
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.onClick
+import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.support.v4.withArguments
-
 
 /**
  * An activity representing a list of Object Kind Plural. This activity
@@ -34,29 +32,23 @@ class MasterListActivity : AppCompatActivity() {
      */
     var twoPane: Boolean = false
 
-    lateinit var toolbar: Toolbar
-    lateinit var fab: FloatingActionButton
-    lateinit var recyclerView: RecyclerView
-
+    val ui = ListComponent()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ListComponent().setContentView(this)
+        ui.setContentView(this)
 
-        toolbar = find<Toolbar>(ListComponent.TOOLBAR_ID)
-        setSupportActionBar(toolbar)
-        toolbar.title = title
+        setSupportActionBar(ui.toolbar)
+        ui.toolbar.title = title
 
-        fab = find<FloatingActionButton>(ListComponent.FAB_ID)
-
-        fab.onClick {
-            view -> snackbar(view!!, "Replace with your own action", Snackbar.LENGTH_LONG) {
+        ui.fab.onClick {
+            view ->
+            snackbar(view!!, "Replace with your own action", Snackbar.LENGTH_LONG) {
                 setAction("Action", null)
             }
         }
 
-        recyclerView = find<RecyclerView>(ListComponent.LIST_ID)
-        setupRecyclerView(recyclerView)
+        setupRecyclerView(ui.recyclerView)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -66,41 +58,39 @@ class MasterListActivity : AppCompatActivity() {
     inner class SimpleItemRecyclerViewAdapter(private val mValues: List<DummyContent.DummyItem>) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val ankoContext = AnkoContext.create(parent.context, parent);
-            val view = ListItemComponent().createView(ankoContext)
-            return ViewHolder(view)
+            val ankoContext = AnkoContext.create(parent.context, parent)
+            val ui = ListItemComponent()
+            val view = ui.createView(ankoContext)
+            return ViewHolder(view, ui)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.mItem = mValues[position]
-            holder.mIdView.text = mValues[position].id
-            holder.mContentView.text = mValues[position].content
+            with(holder) {
+                item = mValues[position]
+                idView.text = mValues[position].id
+                contentView.text = mValues[position].content
 
-            holder.mView.setOnClickListener { v ->
-                if (twoPane) {
-                    val fragment = DetailFragment().withArguments(
-                            DetailFragment.ARG_ITEM_ID to holder.mItem!!.id
-                    )
-                    supportFragmentManager.beginTransaction().replace(DetailComponent.DETAIL_CONTAINER_ID, fragment).commit()
-                } else {
-                    startActivity(intentFor<DetailActivity>(DetailFragment.ARG_ITEM_ID to holder.mItem!!.id))
+                view.setOnClickListener { v ->
+                    if (twoPane) {
+                        val fragment = DetailFragment().withArguments(
+                            DetailFragment.ARG_ITEM_ID to item!!.id
+                        )
+                        supportFragmentManager.beginTransaction().replace(R.id.detail_container, fragment).commit()
+                    } else {
+                        startActivity(intentFor<DetailActivity>(DetailFragment.ARG_ITEM_ID to holder.item!!.id))
+                    }
                 }
             }
         }
 
-        override fun getItemCount(): Int =  mValues.size
+        override fun getItemCount(): Int = mValues.size
 
-        inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-            val mIdView: TextView
-            val mContentView: TextView
-            var mItem: DummyContent.DummyItem? = null
+        inner class ViewHolder(val view: View, val ui: ListItemComponent) : RecyclerView.ViewHolder(view) {
+            val idView = ui.identifier
+            val contentView = ui.content
+            var item: DummyContent.DummyItem? = null
 
-            init {
-                mIdView = mView.find<TextView>(ListItemComponent.IDENTIFIER_ID)
-                mContentView =  mView.find<TextView>(ListItemComponent.CONTENT_ID)
-            }
-
-            override fun toString(): String = "${super.toString()} '${mContentView.text}'"
+            override fun toString(): String = "${super.toString()} '${contentView.text}'"
         }
     }
 }
