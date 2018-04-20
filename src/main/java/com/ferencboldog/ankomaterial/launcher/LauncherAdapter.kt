@@ -13,16 +13,16 @@ import org.jetbrains.anko.sdk15.listeners.onClick
 
 class LauncherAdapter(val items: List<Pair<String, Class<out Activity>>>) : RecyclerView.Adapter<LauncherViewHolder>() {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LauncherViewHolder? {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): LauncherViewHolder {
         val ui = LauncherItemComponent()
-        var adapterView: View? = null
+        lateinit var adapterView: View
         with(ui) {
             adapterView = createView(AnkoContext.create(viewGroup.context))
             button.onClick { view ->
                 view!!.context.startActivity(Intent(view.context, view.tag as Class<*>))
             }
         }
-        return LauncherViewHolder(adapterView!!, ui.button)
+        return LauncherViewHolder(adapterView, ui.button)
     }
 
     override fun getItemCount(): Int = items.size
