@@ -70,7 +70,7 @@ class MasterListActivity : AppCompatActivity() {
                 idView.text = mValues[position].id
                 contentView.text = mValues[position].content
 
-                view.setOnClickListener { v ->
+                view.setOnClickListener {
                     if (twoPane) {
                         val fragment = DetailFragment().withArguments(
                             DetailFragment.ARG_ITEM_ID to item!!.id
