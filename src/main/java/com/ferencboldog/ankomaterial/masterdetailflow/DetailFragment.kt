@@ -38,13 +38,12 @@ class DetailFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        val view = DetailTextComponent().createView(AnkoContext.create(context, this)) as TextView
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        // Show the dummy content as text in a TextView.
-        view.text = mItem.details
+            val view = DetailTextComponent().createView(AnkoContext.create(requireContext(), this)) as TextView
 
-        return view
+            // Show the dummy content as text in a TextView.
+            view.text = mItem.details
+            return view
     }
 }
