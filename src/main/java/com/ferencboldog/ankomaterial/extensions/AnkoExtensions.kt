@@ -23,7 +23,7 @@ fun View.snackbar(text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snack
 fun Fragment.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = requireActivity().snackbar(view, text, length, snackbar)
 
 fun Context.attr(@AttrRes attribute: Int): TypedValue {
-    var typed = TypedValue()
+    val typed = TypedValue()
     ctx.theme.resolveAttribute(attribute, typed, true)
     return typed
 }
