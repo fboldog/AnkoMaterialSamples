@@ -12,7 +12,7 @@ import com.ferencboldog.ankomaterial.masterdetailflow.ui.ListComponent
 import com.ferencboldog.ankomaterial.masterdetailflow.ui.ListItemComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk15.listeners.onClick
 import org.jetbrains.anko.setContentView
 import org.jetbrains.anko.support.v4.withArguments
 

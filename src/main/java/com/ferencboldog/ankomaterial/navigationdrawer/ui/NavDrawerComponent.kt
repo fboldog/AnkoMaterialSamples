@@ -26,7 +26,7 @@ import org.jetbrains.anko.horizontalPadding
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.margin
 import org.jetbrains.anko.matchParent
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk15.listeners.onClick
 import org.jetbrains.anko.relativeLayout
 import org.jetbrains.anko.support.v4.drawerLayout
 import org.jetbrains.anko.textView

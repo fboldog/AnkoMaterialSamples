@@ -7,7 +7,7 @@ import android.view.MenuItem
 import com.ferencboldog.ankomaterial.R
 import com.ferencboldog.ankomaterial.extensions.snackbar
 import com.ferencboldog.ankomaterial.scrolling.ui.ScrollingComponent
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk15.listeners.onClick
 import org.jetbrains.anko.setContentView
 
 class ScrollingActivity : AppCompatActivity() {

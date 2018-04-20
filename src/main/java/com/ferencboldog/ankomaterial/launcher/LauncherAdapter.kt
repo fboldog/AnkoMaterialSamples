@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.ferencboldog.ankomaterial.launcher.ui.LauncherItemComponent
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk15.listeners.onClick
+
 
 class LauncherAdapter(val items: List<Pair<String, Class<out Activity>>>) : RecyclerView.Adapter<LauncherViewHolder>() {
 
