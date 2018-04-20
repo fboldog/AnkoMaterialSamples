@@ -3,16 +3,17 @@ buildscript {
     // allows for -Dpre-dex=false to be set
     ext.preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
-    ext.kotlinVersion = '1.1.1'
-    ext.ankoVersion = '0.10.0-beta-1'
-    ext.supportVersion = '25.2.0'
+    ext.kotlinVersion = '1.2.40'
+    ext.ankoVersion = '0.10.4'
+    ext.supportVersion = '27.1.1'
 
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
@@ -20,6 +21,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 }
 
@@ -30,13 +32,12 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId 'com.ferencboldog.ankomaterial'
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName '1.0'
     }
@@ -66,7 +67,7 @@ dependencies {
         implementation "com.android.support:$name:$supportVersion"
     }
 
-    def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7', 'percent', 'cardview-v7']
+    def anko = ['sdk15', 'sdk15-listeners', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7', 'percent', 'cardview-v7']
 
     anko.each { name ->
         implementation "org.jetbrains.anko:anko-$name:$ankoVersion"
