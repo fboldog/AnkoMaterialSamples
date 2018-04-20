@@ -59,17 +59,17 @@ android {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     def support = ['appcompat-v7', 'design', 'support-v4', 'recyclerview-v7', 'percent', 'cardview-v7']
     support.each { name ->
-        compile "com.android.support:$name:$supportVersion"
+        implementation "com.android.support:$name:$supportVersion"
     }
 
     def anko = ['sdk15', 'support-v4', 'design', 'appcompat-v7', 'recyclerview-v7', 'percent', 'cardview-v7']
 
     anko.each { name ->
-        compile "org.jetbrains.anko:anko-$name:$ankoVersion"
+        implementation "org.jetbrains.anko:anko-$name:$ankoVersion"
     }
 
     // testCompile 'junit:junit:4.12'
