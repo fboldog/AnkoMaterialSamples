@@ -20,7 +20,7 @@ fun lParamsDefault(): android.support.design.widget.CollapsingToolbarLayout.Layo
 
 fun Context.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = Snackbar.make(view, text, length).apply { snackbar() }.show()
 fun View.snackbar(text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = context.snackbar(this, text, length, snackbar)
-fun Fragment.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = activity.snackbar(view, text, length, snackbar)
+fun Fragment.snackbar(view: View, text: CharSequence, length: Int = Snackbar.LENGTH_SHORT, snackbar: Snackbar.() -> Unit) = requireActivity().snackbar(view, text, length, snackbar)
 
 fun Context.attr(@AttrRes attribute: Int): TypedValue {
     var typed = TypedValue()
@@ -49,9 +49,9 @@ fun View.dimenAttr(@AttrRes attribute: Int): Int = context.dimenAttr(attribute)
 fun View.colorAttr(@AttrRes attribute: Int): Int = context.colorAttr(attribute)
 fun View.attr(@AttrRes attribute: Int): TypedValue = context.attr(attribute)
 
-fun Fragment.dimenAttr(@AttrRes attribute: Int): Int = activity.dimenAttr(attribute)
-fun Fragment.colorAttr(@AttrRes attribute: Int): Int = activity.colorAttr(attribute)
-fun Fragment.attr(@AttrRes attribute: Int): TypedValue = activity.attr(attribute)
+fun Fragment.dimenAttr(@AttrRes attribute: Int): Int = requireActivity().dimenAttr(attribute)
+fun Fragment.colorAttr(@AttrRes attribute: Int): Int = requireActivity().colorAttr(attribute)
+fun Fragment.attr(@AttrRes attribute: Int): TypedValue = requireActivity().attr(attribute)
 
 object FrameLayout {
     fun <T : View> T.lparams(
