@@ -27,14 +27,16 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (arguments.containsKey(ARG_ITEM_ID)) {
+        requireNotNull(arguments)
+
+        if (arguments!!.containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP[arguments.getString(ARG_ITEM_ID)]!!
+            mItem = DummyContent.ITEM_MAP[arguments!!.getString(ARG_ITEM_ID)]!!
 
             //FIXME replace with a soultion without ID
-            activity.find<CollapsingToolbarLayout>(R.id.detail_collapsing_toolbar)?.title = mItem.content
+            requireActivity().find<CollapsingToolbarLayout>(R.id.detail_collapsing_toolbar).title = mItem.content
         }
     }
 
