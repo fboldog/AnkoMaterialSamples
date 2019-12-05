@@ -1,3 +1,5 @@
+**DEPRECATED** => More info https://github.com/Kotlin/anko/blob/master/GOODBYE.md
+
 # Anko with Material Design
 based on Android Studio sample apps.
 
